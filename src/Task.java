@@ -1,7 +1,7 @@
 public class Task {
-    int id;
-    String title;
-    TaskStatus taskStatus;
+    private int id;
+    private String title;
+    private TaskStatus taskStatus;
 
     // enum：ステータスで取得する値を限定するためこの3つのみを許可
     enum TaskStatus {
@@ -16,12 +16,24 @@ public class Task {
         this.taskStatus = TaskStatus.NOT_STARTED;
     }
 
+    public void setId(int id) {
+        this.id = id;
+    }
+
     public int getId() {
         return id;
     }
 
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
     public String getTitle() {
         return title;
+    }
+
+    public void setTaskStatus(TaskStatus taskStatus) {
+        this.taskStatus = taskStatus;
     }
 
     public TaskStatus getTaskStatus() {

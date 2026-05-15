@@ -2,14 +2,24 @@
 // ガターの <icon src="AllIcons.Actions.Execute"/> アイコンをクリックします。
 public class Main {
     public static void main(String[] args) {
-        //TIP ハイライトされたテキストにキャレットがある状態で <shortcut actionId="ShowIntentionActions"/> を押すと
-        // IntelliJ IDEA によるその修正案を確認できます。
-        System.out.printf("Hello and welcome!");
+        Task task1 = new Task("Todoアプリ作成");
 
-        for (int i = 1; i <= 5; i++) {
-            //TIP <shortcut actionId="Debug"/> を押してコードのデバッグを開始します。<icon src="AllIcons.Debugger.Db_set_breakpoint"/> ブレークポイントを 1 つ設定しましたが、
-            // <shortcut actionId="ToggleLineBreakpoint"/> を押すといつでも他のブレークポイントを追加できます。
-            System.out.println("i = " + i);
-        }
+        task1.setId(1);
+        task1.setTaskStatus(Task.TaskStatus.IN_PROGRESS);
+
+        System.out.println(task1.getId());
+        System.out.println(task1.getTitle());
+        System.out.println(task1.getTaskStatus());
+
+        Task task2 = new Task("筋トレ");
+
+        task2.setId(2);
+        task2.setTaskStatus(Task.TaskStatus.IN_PROGRESS);
+
+        System.out.println(task2.getId());
+        System.out.println(task2.getTitle());
+        System.out.println(task2.getTaskStatus());
+
     }
+
 }
