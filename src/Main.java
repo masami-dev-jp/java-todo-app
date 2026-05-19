@@ -49,6 +49,10 @@ public class Main {
         System.out.println(tasks.get(1).getTaskStatus());
 
 
+        for (Task task : tasks) {
+            System.out.println(task.getId());
+            System.out.println(task.getTitle());
+            System.out.println(task.getTaskStatus());
+        }
     }
-
 }
