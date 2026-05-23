@@ -14,4 +14,22 @@ public class TaskService {
 
         nextId++;
     }
+
+    public void updateTaskStatus(int id, Task.TaskStatus newStatus) {
+        for (Task task : tasks) {
+            if (task.getId() == id) {
+                task.setTaskStatus(newStatus);
+                return;
+            }
+        }
+    }
+
+
+    public void listTasks() {
+        for (Task task : tasks) {
+            System.out.println(task.getId());
+            System.out.println(task.getTitle());
+            System.out.println(task.getTaskStatus());
+        }
+    }
 }
