@@ -9,70 +9,84 @@ public class Main {
 
         Scanner scanner = new Scanner(System.in);
 
-        System.out.println("1. 一覧表示");
-        System.out.println("2. タスク追加");
-        System.out.println("3. タスクステータス更新");
-        System.out.println("4. タスク削除");
+        while (true) {
 
-        int menu = scanner.nextInt();
-        scanner.nextLine();
+            System.out.println("1. 一覧表示");
+            System.out.println("2. タスク追加");
+            System.out.println("3. タスクステータス更新");
+            System.out.println("4. タスク削除");
+            System.out.println("0. 終了");
 
-        Task.TaskStatus newStatus = null;
 
-        switch (menu) {
-            case 1:
-                System.out.println("タスク一覧を表示します");
-                service.listTasks();
-                break;
+            int menu = scanner.nextInt();
+            scanner.nextLine();
 
-            case 2:
-                System.out.println("追加するタスクを入力してください");
-                String title = scanner.nextLine();
-                service.addTask(title);
-                service.listTasks();
-                break;
 
-            case 3:
-                System.out.println("更新するタスクIDを入力してください");
-                int id = scanner.nextInt();
-                scanner.nextLine();
+            switch (menu) {
 
-                System.out.println("更新後のステータスを選択してください");
-                System.out.println("1. NOT_STARTED");
-                System.out.println("2. IN_PROGRESS");
-                System.out.println("3. DONE");
+                case 0:
+                    return;
 
-                int statusMenu = scanner.nextInt();
-                scanner.nextLine();
+                case 1:
+                    System.out.println("タスク一覧を表示します");
+                    service.listTasks();
+                    break;
 
-                switch (statusMenu) {
-                    case 1:
-                        newStatus = Task.TaskStatus.NOT_STARTED;
-                        break;
+                case 2:
+                    System.out.println("追加するタスクを入力してください");
+                    String title = scanner.nextLine();
+                    service.addTask(title);
+                    service.listTasks();
+                    break;
 
-                    case 2:
-                        newStatus = Task.TaskStatus.IN_PROGRESS;
-                        break;
+                case 3:
+                    Task.TaskStatus newStatus = null;
 
-                    case 3:
-                        newStatus = Task.TaskStatus.DONE;
-                        break;
+                    System.out.println("更新するタスクIDを入力してください");
+                    int id = scanner.nextInt();
+                    scanner.nextLine();
 
-                    default:
-                        throw new IllegalAccessException("不正な入力です");
+                    System.out.println("更新後のステータスを選択してください");
+                    System.out.println("1. NOT_STARTED");
+                    System.out.println("2. IN_PROGRESS");
+                    System.out.println("3. DONE");
 
-                }
-                service.updateTaskStatus(id,newStatus);
-                break;
+                    int statusMenu = scanner.nextInt();
+                    scanner.nextLine();
 
-            case 4:
-                System.out.println("タスク削除");
-                break;
+                    switch (statusMenu) {
+                        case 1:
+                            newStatus = Task.TaskStatus.NOT_STARTED;
+                            break;
 
-            default:
-                System.out.println("存在しないメニューです");
+                        case 2:
+                            newStatus = Task.TaskStatus.IN_PROGRESS;
+                            break;
+
+                        case 3:
+                            newStatus = Task.TaskStatus.DONE;
+                            break;
+
+                        default:
+                            throw new IllegalArgumentException("不正な入力です");
+                    }
+                    service.updateTaskStatus(id, newStatus);
+                    break;
+
+                case 4:
+                    System.out.println("削除したいタスクIDを入力してください");
+                    service.listTasks();
+                    int deleteId = scanner.nextInt();
+                    scanner.nextLine();
+
+                    service.deleteTask(deleteId);
+                    service.listTasks();
+                    break;
+
+                default:
+                    System.out.println("存在しないメニューです");
+            }
         }
-
 
 
 
