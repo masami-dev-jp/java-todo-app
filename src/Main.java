@@ -11,16 +11,10 @@ public class Main {
 
         while (true) {
 
-            System.out.println("1. 一覧表示");
-            System.out.println("2. タスク追加");
-            System.out.println("3. タスクステータス更新");
-            System.out.println("4. タスク削除");
-            System.out.println("0. 終了");
-
+            showMenu();
 
             int menu = scanner.nextInt();
             scanner.nextLine();
-
 
             switch (menu) {
 
@@ -87,22 +81,13 @@ public class Main {
                     System.out.println("存在しないメニューです");
             }
         }
+    }
 
-
-
-
-        // serviceにタスク追加
-/*        service.addTask("Todoアプリ作成");
-        service.addTask("筋トレ");
-
-        // タスクステータス更新
-        service.updateTaskStatus(1, Task.TaskStatus.DONE);
-
-        // タスク削除
-        service.deleteTask(1);
-
-        // タスク一覧表示
-        service.listTasks();*/
-
+    private static void showMenu() {
+        System.out.println("1. 一覧表示");
+        System.out.println("2. タスク追加");
+        System.out.println("3. タスクステータス更新");
+        System.out.println("4. タスク削除");
+        System.out.println("0. 終了");
     }
 }
