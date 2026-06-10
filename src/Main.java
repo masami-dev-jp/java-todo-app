@@ -22,15 +22,11 @@ public class Main {
                     return;
 
                 case 1:
-                    System.out.println("タスク一覧を表示します");
-                    service.listTasks();
+                    handleListTasks(service, scanner);
                     break;
 
                 case 2:
-                    System.out.println("追加するタスクを入力してください");
-                    String title = scanner.nextLine();
-                    service.addTask(title);
-                    service.listTasks();
+                    handleAddTask(service, scanner);
                     break;
 
                 case 3:
@@ -68,13 +64,7 @@ public class Main {
                     break;
 
                 case 4:
-                    System.out.println("削除したいタスクIDを入力してください");
-                    service.listTasks();
-                    int deleteId = scanner.nextInt();
-                    scanner.nextLine();
-
-                    service.deleteTask(deleteId);
-                    service.listTasks();
+                    handleDeleteTask(service, scanner);
                     break;
 
                 default:
@@ -83,8 +73,31 @@ public class Main {
         }
     }
 
+
+    private static void handleListTasks(TaskService service, Scanner scanner) {
+        System.out.println("タスク一覧を表示します");
+        service.listTasks();
+    }
+
+    private static void handleAddTask(TaskService service, Scanner scanner) {
+        System.out.println("追加するタスクを入力してください");
+        String title = scanner.nextLine();
+        service.addTask(title);
+        service.listTasks();
+    }
+
+    private static void handleDeleteTask(TaskService service, Scanner scanner) {
+        System.out.println("削除したいタスクIDを入力してください");
+        service.listTasks();
+        int deleteId = scanner.nextInt();
+        scanner.nextLine();
+
+        service.deleteTask(deleteId);
+        service.listTasks();
+    }
+
     private static void showMenu() {
-        System.out.println("1. 一覧表示");
+        System.out.println("1. タスク一覧表示");
         System.out.println("2. タスク追加");
         System.out.println("3. タスクステータス更新");
         System.out.println("4. タスク削除");
