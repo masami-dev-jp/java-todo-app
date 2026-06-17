@@ -30,7 +30,7 @@ public class Main {
                     break;
 
                 case 3:
-                    handleUpdateStatus(service, scanner);
+                    handleUpdateTaskStatus(service, scanner);
                     break;
 
 
@@ -69,7 +69,7 @@ public class Main {
     }
 
 
-    private static void handleUpdateStatus(TaskService service, Scanner scanner) {
+    private static void handleUpdateTaskStatus(TaskService service, Scanner scanner) {
 
         Task.TaskStatus newStatus = null;
 
