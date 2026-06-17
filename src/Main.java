@@ -22,7 +22,7 @@ public class Main {
                     return;
 
                 case 1:
-                    handleListTasks(service, scanner);
+                    handleListTasks(service);
                     break;
 
                 case 2:
@@ -30,38 +30,9 @@ public class Main {
                     break;
 
                 case 3:
-                    Task.TaskStatus newStatus = null;
-
-                    System.out.println("更新するタスクIDを入力してください");
-                    int id = scanner.nextInt();
-                    scanner.nextLine();
-
-                    System.out.println("更新後のステータスを選択してください");
-                    System.out.println("1. NOT_STARTED");
-                    System.out.println("2. IN_PROGRESS");
-                    System.out.println("3. DONE");
-
-                    int statusMenu = scanner.nextInt();
-                    scanner.nextLine();
-
-                    switch (statusMenu) {
-                        case 1:
-                            newStatus = Task.TaskStatus.NOT_STARTED;
-                            break;
-
-                        case 2:
-                            newStatus = Task.TaskStatus.IN_PROGRESS;
-                            break;
-
-                        case 3:
-                            newStatus = Task.TaskStatus.DONE;
-                            break;
-
-                        default:
-                            throw new IllegalArgumentException("不正な入力です");
-                    }
-                    service.updateTaskStatus(id, newStatus);
+                    handleUpdateStatus(service, scanner);
                     break;
+
 
                 case 4:
                     handleDeleteTask(service, scanner);
@@ -74,27 +45,6 @@ public class Main {
     }
 
 
-    private static void handleListTasks(TaskService service, Scanner scanner) {
-        System.out.println("タスク一覧を表示します");
-        service.listTasks();
-    }
-
-    private static void handleAddTask(TaskService service, Scanner scanner) {
-        System.out.println("追加するタスクを入力してください");
-        String title = scanner.nextLine();
-        service.addTask(title);
-        service.listTasks();
-    }
-
-    private static void handleDeleteTask(TaskService service, Scanner scanner) {
-        System.out.println("削除したいタスクIDを入力してください");
-        service.listTasks();
-        int deleteId = scanner.nextInt();
-        scanner.nextLine();
-
-        service.deleteTask(deleteId);
-        service.listTasks();
-    }
 
     private static void showMenu() {
         System.out.println("1. タスク一覧表示");
@@ -102,5 +52,66 @@ public class Main {
         System.out.println("3. タスクステータス更新");
         System.out.println("4. タスク削除");
         System.out.println("0. 終了");
+    }
+
+
+    private static void handleListTasks(TaskService service) {
+        System.out.println("タスク一覧を表示します");
+        service.listTasks();
+    }
+
+
+    private static void handleAddTask(TaskService service, Scanner scanner){
+        System.out.println("追加するタスクを入力してください");
+        String title = scanner.nextLine();
+        service.addTask(title);
+        service.listTasks();
+    }
+
+
+    private static void handleUpdateStatus(TaskService service, Scanner scanner) {
+
+        Task.TaskStatus newStatus = null;
+
+        System.out.println("更新するタスクIDを入力してください");
+        int id = scanner.nextInt();
+        scanner.nextLine();
+
+        System.out.println("更新後のステータスを選択してください");
+        System.out.println("1. NOT_STARTED");
+        System.out.println("2. IN_PROGRESS");
+        System.out.println("3. DONE");
+
+        int statusMenu = scanner.nextInt();
+        scanner.nextLine();
+
+        switch (statusMenu) {
+            case 1:
+                newStatus = Task.TaskStatus.NOT_STARTED;
+                break;
+
+            case 2:
+                newStatus = Task.TaskStatus.IN_PROGRESS;
+                break;
+
+            case 3:
+                newStatus = Task.TaskStatus.DONE;
+                break;
+
+            default:
+                throw new IllegalArgumentException("不正な入力です");
+        }
+        service.updateTaskStatus(id, newStatus);
+    }
+
+
+    private static void handleDeleteTask(TaskService service, Scanner scanner){
+        System.out.println("削除したいタスクIDを入力してください");
+        service.listTasks();
+        int deleteId = scanner.nextInt();
+        scanner.nextLine();
+
+        service.deleteTask(deleteId);
+        service.listTasks();
     }
 }
