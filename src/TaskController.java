@@ -10,4 +10,10 @@ public class TaskController {
         this.scanner = scanner;
     }
 
+    public void handleListTasks() {
+        System.out.println("タスク一覧を表示します");
+        service.listTasks();
+    }
+
+
 }

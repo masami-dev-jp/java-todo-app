@@ -6,8 +6,9 @@ public class Main {
 
         // TaskServiceインスタンス生成しserviceに代入
         TaskService service = new TaskService();
-
         Scanner scanner = new Scanner(System.in);
+        TaskController controller = new TaskController(service, scanner);
+
 
         while (true) {
 
@@ -22,7 +23,7 @@ public class Main {
                     return;
 
                 case 1:
-                    handleListTasks(service);
+                    controller.handleListTasks();
                     break;
 
                 case 2:
@@ -55,10 +56,7 @@ public class Main {
     }
 
 
-    private static void handleListTasks(TaskService service) {
-        System.out.println("タスク一覧を表示します");
-        service.listTasks();
-    }
+
 
 
     private static void handleAddTask(TaskService service, Scanner scanner){
