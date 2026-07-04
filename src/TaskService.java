@@ -11,6 +11,11 @@ public class TaskService {
 
     // タスクを追加するメソッド
     public void addTask(String title) {
+
+        if (title.isBlank()) {
+            throw new IllegalArgumentException("タスク名を入力してください");
+        }
+
         Task task = new Task(title);
         task.setId(nextId);
         tasks.add(task);

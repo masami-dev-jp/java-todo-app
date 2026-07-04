@@ -20,8 +20,13 @@ public class TaskController {
     public void handleAddTask(){
         System.out.println("追加するタスクを入力してください");
         String title = scanner.nextLine();
-        service.addTask(title);
-        service.listTasks();
+
+        try {
+            service.addTask(title);
+            service.listTasks();
+        } catch(IllegalArgumentException e) {
+            System.out.println(e.getMessage());
+        }
     }
 
 
@@ -68,8 +73,13 @@ public class TaskController {
         int deleteId = scanner.nextInt();
         scanner.nextLine();
 
-        service.deleteTask(deleteId);
-        service.listTasks();
+        try {
+            service.deleteTask(deleteId);
+            service.listTasks();
+        } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
+        }
+
     }
 
 }
