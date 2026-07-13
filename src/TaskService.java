@@ -31,11 +31,16 @@ public class TaskService {
                 return;
             }
         }
+        throw new IllegalArgumentException("指定されたIDのタスクは存在しません");
     }
 
     // 指定したタスクを削除するメソッド
     public void deleteTask(int id) {
-        tasks.removeIf(task -> task.getId() == id);
+        boolean removed = tasks.removeIf(task -> task.getId() == id);
+
+        if (!removed) {
+            throw new IllegalArgumentException("指定されたIDのタスクは存在しません");
+        }
     }
 
     // タスク一覧を表示するメソッド
