@@ -17,14 +17,14 @@ public class TaskController {
     }
 
 
-    public void handleAddTask(){
+    public void handleAddTask() {
         System.out.println("追加するタスクを入力してください");
         String title = scanner.nextLine();
 
         try {
             service.addTask(title);
             service.listTasks();
-        } catch(IllegalArgumentException e) {
+        } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
         }
     }
@@ -38,48 +38,54 @@ public class TaskController {
         int id = scanner.nextInt();
         scanner.nextLine();
 
-        System.out.println("更新後のステータスを選択してください");
-        System.out.println("1. NOT_STARTED");
-        System.out.println("2. IN_PROGRESS");
-        System.out.println("3. DONE");
+        while (newStatus == null) {
+            System.out.println("更新後のステータスを選択してください");
+            System.out.println("1. NOT_STARTED");
+            System.out.println("2. IN_PROGRESS");
+            System.out.println("3. DONE");
 
-        int statusMenu = scanner.nextInt();
-        scanner.nextLine();
+            int statusMenu = scanner.nextInt();
+            scanner.nextLine();
 
-        switch (statusMenu) {
-            case 1:
-                newStatus = Task.TaskStatus.NOT_STARTED;
-                break;
+            switch (statusMenu) {
+                case 1:
+                    newStatus = Task.TaskStatus.NOT_STARTED;
+                    break;
 
-            case 2:
-                newStatus = Task.TaskStatus.IN_PROGRESS;
-                break;
+                case 2:
+                    newStatus = Task.TaskStatus.IN_PROGRESS;
+                    break;
 
-            case 3:
-                newStatus = Task.TaskStatus.DONE;
-                break;
+                case 3:
+                    newStatus = Task.TaskStatus.DONE;
+                    break;
 
-            default:
-                throw new IllegalArgumentException("不正な入力です");
+                default:
+                    System.out.println("1~3の数字を入力してください");
+            }
         }
-        service.updateTaskStatus(id, newStatus);
+
+            try {
+                service.updateTaskStatus(id, newStatus);
+                service.listTasks();
+            } catch (IllegalArgumentException e) {
+                System.out.println(e.getMessage());
+            }
     }
 
 
-
-    public void handleDeleteTask(){
-        System.out.println("削除したいタスクIDを入力してください");
-        service.listTasks();
-        int deleteId = scanner.nextInt();
-        scanner.nextLine();
-
-        try {
-            service.deleteTask(deleteId);
+        public void handleDeleteTask () {
+            System.out.println("削除したいタスクIDを入力してください");
             service.listTasks();
-        } catch (IllegalArgumentException e) {
-            System.out.println(e.getMessage());
+            int deleteId = scanner.nextInt();
+            scanner.nextLine();
+
+            try {
+                service.deleteTask(deleteId);
+                service.listTasks();
+            } catch (IllegalArgumentException e) {
+                System.out.println(e.getMessage());
+            }
+
         }
-
-    }
-
 }
